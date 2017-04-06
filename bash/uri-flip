@@ -39,7 +39,7 @@ create_hypatiaURL() {
 }
 
 
-while getopts 'dhu:v' flag; do
+while getopts 'edhu:v' flag; do
   case "${flag}" in
     d) shift
        decode $1 
