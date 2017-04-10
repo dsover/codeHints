@@ -9,7 +9,7 @@ display_help() {
     echo "   -e,              URI encode the input"
     echo "   -d,              URI decode the input"
     echo "   -h               Show this help      "
-    echo "   -u               Create a url for hypatia      "
+#    echo "   -u               Create a url for hypatia      "
     # echo some stuff here for the -a or --add-options 
     exit 1
 }
@@ -28,18 +28,7 @@ encode() {
     exit 1
 }
 
-create_hypatiaURL() {
-    encoded=`echo $1 | perl -MURI::Escape -ne 'chomp;print uri_escape($_),"\n"'`
-    hypatiaURL="http://hypatia.api.cnn.com/svc/content/v2/search/collection1/url:"
-    hypatiaURL+=$encoded
-    hypatiaURL+="- http://hypatia.api.cnn.com/svc/content/v2/search/collection1/url:"
-    hypatiaURL+=$encoded
-    echo $hypatiaURL
-    exit 1
-}
-
-
-while getopts 'edhu:v' flag; do
+while getopts 'edh:v' flag; do
   case "${flag}" in
     d) shift
        decode $1 
@@ -49,9 +38,9 @@ while getopts 'edhu:v' flag; do
        exit 0 ;;
     h) display_help
        exit 0 ;;
-    u) shift 
-       create_hypatiaURL $1
-       exit 0;;
+#     u) shift 
+#        create_hypatiaURL $1
+#        exit 0;;
      *) error "Unexpected option ${flag}" ;;
   esac
 done
